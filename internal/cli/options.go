@@ -203,33 +203,39 @@ func parseOptions(args []string, specs []*option, opts *Options) ([]string, erro
 			continue
 		}
 		if len(arg) > 1 && arg[0] == '-' && arg != "-" {
-			ch := arg[1]
-			var found *option
-			for _, s := range specs {
-				if s.short != 0 && s.short == ch {
-					found = s
-					break
+			// OptionParser allows clustered short flags and attached values (-q -aamd64).
+			rest := arg[1:]
+			for len(rest) > 0 {
+				ch := rest[0]
+				rest = rest[1:]
+				var found *option
+				for _, s := range specs {
+					if s.short != 0 && s.short == ch {
+						found = s
+						break
+					}
 				}
-			}
-			if found == nil {
-				return nil, fmt.Errorf("invalid option: %s", arg)
-			}
-			if found.kind == optFlag || found.kind == optNegatable {
-				if err := found.set(opts, "", false); err != nil {
+				if found == nil {
+					return nil, fmt.Errorf("invalid option: %s", arg)
+				}
+				if found.kind == optFlag || found.kind == optNegatable {
+					if err := found.set(opts, "", false); err != nil {
+						return nil, err
+					}
+					continue
+				}
+				val := rest
+				rest = ""
+				if val == "" {
+					if i+1 >= len(args) {
+						return nil, fmt.Errorf("missing argument: %s", arg)
+					}
+					i++
+					val = args[i]
+				}
+				if err := found.set(opts, val, false); err != nil {
 					return nil, err
 				}
-				continue
-			}
-			val := arg[2:]
-			if val == "" {
-				if i+1 >= len(args) {
-					return nil, fmt.Errorf("missing argument: %s", arg)
-				}
-				i++
-				val = args[i]
-			}
-			if err := found.set(opts, val, false); err != nil {
-				return nil, err
 			}
 			continue
 		}
