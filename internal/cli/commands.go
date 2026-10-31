@@ -55,7 +55,6 @@ func runAsm(argv []string, info commandInfo) int {
 		return 0
 	}
 	b.opts.IFile = b.argv[0]
-	b.opts.HasIFile = true
 	raw, err := b.input()
 	if err != nil {
 		logger.Error(rubySysError(err, b.opts.IFile))
@@ -199,7 +198,6 @@ func runDisasm(argv []string, info commandInfo) int {
 		return 0
 	}
 	b.opts.IFile = b.argv[0]
-	b.opts.HasIFile = true
 	raw, err := b.input()
 	if err != nil {
 		logger.Error(rubySysError(err, b.opts.IFile))
@@ -285,7 +283,6 @@ func runEmu(argv []string, info commandInfo) int {
 			apply: func(o *Options, v string) error {
 				if v == "true" {
 					o.Verbose = 0
-					o.Quiet = true
 				}
 				return nil
 			},
@@ -314,7 +311,6 @@ func runEmu(argv []string, info commandInfo) int {
 		return 0
 	}
 	b.opts.IFile = b.argv[0]
-	b.opts.HasIFile = true
 	raw, err := b.input()
 	if err != nil {
 		logger.Error(rubySysError(err, b.opts.IFile))

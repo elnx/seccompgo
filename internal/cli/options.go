@@ -11,7 +11,6 @@ type Options struct {
 	Arch     string
 	HasArch  bool
 	IFile    string
-	HasIFile bool
 	OFile    string
 	HasOFile bool
 	Format   string

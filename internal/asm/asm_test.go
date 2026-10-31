@@ -707,6 +707,22 @@ func TestParserLabelsAcrossLines(t *testing.T) {
 	}
 }
 
+func TestParserErrorMessagesFromGrammar(t *testing.T) {
+	cases := []struct{ src, want string }{
+		{"      A = +A\n", "<inline>:1:11 do you mean A = -A?\n      A = +A\n          ^\n"},
+		{"      mem[16] = A\n", "<inline>:1:11 index of mem[] must between 0 and 15, got 16\n      mem[16] = A\n          ^^\n"},
+		{"      A = mem[0xaa]\n", "<inline>:1:15 index of mem[] must between 0 and 15, got 170\n      A = mem[0xaa]\n              ^^^^\n"},
+		{"      A = args[8]\n", "<inline>:1:16 index of args[] must between 0 and 5, got 8\n      A = args[8]\n               ^\n"},
+		{"      next: A = 1\n", "<inline>:1:7 'next' is a reserved label\n      next: A = 1\n      ^^^^\n"},
+	}
+	for _, tc := range cases {
+		_, err := NewCompiler(tc.src, "", "amd64").Compile()
+		if err == nil || err.Error() != tc.want {
+			t.Errorf("src %q:\n got %v\nwant %s", tc.src, err, tc.want)
+		}
+	}
+}
+
 func TestAsmAcceptsDisasmOutputForEveryArch(t *testing.T) {
 	files, _ := filepath.Glob(filepath.Join("..", "..", "testdata", "data", "*.bpf"))
 	if len(files) == 0 {

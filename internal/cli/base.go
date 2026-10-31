@@ -258,7 +258,6 @@ type filterTuple struct {
 func (b *base) collectFilters() []filterTuple {
 	if !b.opts.HasCommand && !b.opts.HasPID && len(b.argv) > 0 {
 		b.opts.IFile = b.argv[0]
-		b.opts.HasIFile = true
 		b.argv = b.argv[1:]
 	}
 	b.warnIgnoredArguments()

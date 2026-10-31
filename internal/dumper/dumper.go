@@ -132,10 +132,6 @@ func ptraceSyscallResume(pid int) {
 	rawPtrace(ptraceSyscall, pid, 0, 0)
 }
 
-func ptraceTraceme() {
-	rawPtrace(0, 0, 0, 0)
-}
-
 func peekData(pid int, addr uint64) uint64 {
 	var word uint64
 	_, errno := rawPtrace(ptracePeekData, pid, uintptr(addr), uintptr(unsafe.Pointer(&word)))
@@ -290,6 +286,7 @@ func Dump(args []string, limit int, timeout *float64) []Result {
 	var mu sync.Mutex
 	pids := []int{pid}
 	syscalls := map[int]*tracedSyscall{}
+	fallbackSeen := map[int]bool{}
 	stop := false
 	addPID := func(p int) {
 		mu.Lock()
@@ -334,7 +331,7 @@ func Dump(args []string, limit int, timeout *float64) []Result {
 		addPID(child)
 		if st.Stopped() {
 			if st.StopSignal()&sigStopCode != 0 {
-				handleSyscallStop(child, syscalls, &collect, &limit, &stop)
+				handleSyscallStop(child, syscalls, fallbackSeen, &collect, &limit, &stop)
 			}
 			if !stop {
 				ptraceSyscallResume(child)
@@ -356,7 +353,7 @@ func Dump(args []string, limit int, timeout *float64) []Result {
 
 // handleSyscallStop records a syscall entry and checks a completed one for a seccomp
 // installation, using PTRACE_GET_SYSCALL_INFO when available.
-func handleSyscallStop(child int, syscalls map[int]*tracedSyscall, collect *[]Result, limit *int, stop *bool) {
+func handleSyscallStop(child int, syscalls map[int]*tracedSyscall, fallbackSeen map[int]bool, collect *[]Result, limit *int, stop *bool) {
 	info, err := getSyscallInfo(child)
 	if err == nil {
 		switch info.Op {
@@ -381,7 +378,13 @@ func handleSyscallStop(child int, syscalls map[int]*tracedSyscall, collect *[]Re
 		}
 		return
 	}
-	// Fallback for kernels without PTRACE_GET_SYSCALL_INFO: alternate entry/exit.
+	// Fallback for kernels without PTRACE_GET_SYSCALL_INFO: the first syscall stop
+	// after the exec/fork event is the in-progress syscall's exit; skip it, then
+	// alternate entry/exit.
+	if !fallbackSeen[child] {
+		fallbackSeen[child] = true
+		return
+	}
 	sys := syscalls[child]
 	if sys == nil {
 		s, err := readSyscall(child)

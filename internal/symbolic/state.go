@@ -1,7 +1,6 @@
 package symbolic
 
 import (
-	"strconv"
 	"strings"
 	"sync"
 )
@@ -108,6 +107,3 @@ func (s *State) Pinned(offset uint32) (uint32, bool) {
 
 // String returns the state key.
 func (s *State) String() string { return s.Key() }
-
-// OffsetString is a helper shared with callers that need the decimal byte offset.
-func OffsetString(offset uint32) string { return strconv.FormatUint(uint64(offset), 10) }

@@ -14,7 +14,6 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
-	"sort"
 	"strconv"
 	"strings"
 )
@@ -155,23 +154,11 @@ func main() {
 	}
 	// The ABI order used by the scanner is the Ruby ABI hash order, not alphabetical.
 	abiOrder := []string{"amd64", "i386", "aarch64", "riscv64", "s390x"}
-	sort.SliceStable(archs, func(i, j int) bool {
-		return indexOf(abiOrder, archs[i]) < indexOf(abiOrder, archs[j])
-	})
 	if err := writeTables(*out, tables, abiOrder, args, argsOrder); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
 	fmt.Printf("wrote %s (%d syscalls, %d prototypes)\n", *out, countTables(tables), len(args))
-}
-
-func indexOf(xs []string, x string) int {
-	for i, v := range xs {
-		if v == x {
-			return i
-		}
-	}
-	return len(xs)
 }
 
 func countTables(t map[string][]entry) int {
