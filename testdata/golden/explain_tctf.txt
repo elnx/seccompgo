@@ -1,0 +1,22 @@
+
+Architecture: i386
+
+  ALLOW:
+    exit, read, write, brk, mmap, munmap, exit_group
+
+  KILL:
+    <default> (any other syscall)
+
+Architecture: amd64
+
+  ALLOW:
+    close, munmap, brk, exit, exit_group
+    open when filename == 0x31337 && flags == 0x0
+    mmap when prot == 0x2
+    execve when filename == 0x7ffea12f7d0e
+
+  KILL:
+    sys_number >= 0x40000000  (x32 ABI)
+    <default> (any other syscall)
+
+Other architectures: KILL

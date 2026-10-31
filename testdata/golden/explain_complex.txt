@@ -1,0 +1,19 @@
+
+Architecture: amd64
+
+  ALLOW:
+    read
+    write when (count & fd & 0xffff) == (buf | 0x10)
+    openat when flags == (0x1337 & filename)
+
+  TRACE(1):
+    <default> (any other syscall)
+
+  ERRNO(1):
+    write when (count & fd & 0xffff) != (buf | 0x10)
+    openat when flags != (0x1337 & filename)
+
+  KILL:
+    sys_number >= 0x40000000  (x32 ABI)
+
+Other architectures: KILL

@@ -1,0 +1,9 @@
+
+Architecture: amd64
+
+  ALLOW:
+    sys_number >= 0x40000000 when args[0] != 0x3  (x32 ABI)
+    <default> (any other syscall)
+
+  ERRNO(7):
+    sys_number >= 0x40000000 when args[0] == 0x3  (x32 ABI)

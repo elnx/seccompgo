@@ -1,0 +1,5 @@
+
+Architecture: amd64
+
+  KILL:
+    <default> (any syscall)

@@ -1,0 +1,8 @@
+
+Architecture: amd64
+
+  ALLOW:
+    <default> (any other syscall)
+
+  KILL:
+    open, clone, fork, vfork, execve, creat, openat, execveat

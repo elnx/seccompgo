@@ -1,0 +1,10 @@
+
+Architecture: 0x14 (unknown)
+
+  ALLOW:
+    0x3
+
+  KILL:
+    <default> (any other syscall)
+
+Other architectures: KILL

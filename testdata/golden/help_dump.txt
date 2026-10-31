@@ -1,0 +1,21 @@
+dump - Automatically dump seccomp bpf from executable(s).
+NOTE: This command is only available on Linux.
+
+Usage: seccomp-tools dump [EXEC] [options]
+    -c, --sh-exec <command>          Executes the given command (via sh) and dumps its seccomp.
+                                     Use this to pass arguments or pipe things to the executable.
+                                     e.g. use `-c "./bin > /dev/null"` to keep the program output out of the result.
+                                     Takes precedence over the positional argument.
+    -l, --limit LIMIT                Dump only the first LIMIT installed filters.
+                                     Only meaningful when the input is an executable or --pid. Default: 1
+                                     An executable is killed once it reaches LIMIT.
+    -p, --pid PID                    Dump the seccomp filters installed on an existing process.
+                                     You must have CAP_SYS_ADMIN (e.g. be root) to use this option.
+    -t, --timeout SEC                Timeout (seconds) for the execution. Default: no timeout
+                                     This option is ignored when --pid is given.
+    -f, --format FORMAT              Output format. FORMAT can only be one of <disasm|raw|inspect>.
+                                     Default: disasm
+    -o, --output FILE                Write output to FILE instead of stdout.
+                                     If multiple seccomp syscalls have been invoked (see --limit),
+                                     results are written to FILE, FILE_1, FILE_2, etc.
+                                     For example, with "--output out.bpf" the output files are out.bpf, out_1.bpf, ...

@@ -1,0 +1,5 @@
+
+Architecture: amd64
+
+  ALLOW:
+    <default> (any syscall)

@@ -1,0 +1,17 @@
+disasm - Disassemble seccomp bpf.
+
+Usage: seccomp-tools disasm BPF_FILE [options]
+    -o, --output FILE                Write output to FILE instead of stdout.
+    -a, --arch ARCH                  Specify architecture.
+                                     Supported architectures are <aarch64|amd64|i386|riscv64|s390x>.
+                                     Default: auto-detected from the host machine.
+                                     Set it when the filter targets an architecture other than the host.
+        --[no-]bpf                   Display BPF bytes (code, jt, etc.).
+                                     Default: true
+        --[no-]arg-infer             Display syscall arguments with parameter names when possible.
+                                     Default: true
+        --asm-able                   Make the output valid input for "seccomp-tools asm".
+                                     By default, "seccomp-tools disasm" outputs a human-readable format meant for analysis.
+                                     With this flag the output is simplified so it can be fed back to "seccomp-tools asm".
+                                     This flag implies "--no-bpf --no-arg-infer".
+                                     Default: false
