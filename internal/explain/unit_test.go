@@ -4,9 +4,9 @@ import (
 	"strings"
 	"testing"
 
-	"seccompgo/internal/explain"
-	"seccompgo/internal/symbolic"
-	"seccompgo/internal/symbolic/executor"
+	"github.com/elnx/seccompgo/internal/explain"
+	"github.com/elnx/seccompgo/internal/symbolic"
+	"github.com/elnx/seccompgo/internal/symbolic/executor"
 )
 
 func con(off uint32, op string, val uint64) *symbolic.Constraint {

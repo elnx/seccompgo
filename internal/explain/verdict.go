@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"seccompgo/internal/consts"
-	"seccompgo/internal/symbolic"
+	"github.com/elnx/seccompgo/internal/consts"
+	"github.com/elnx/seccompgo/internal/symbolic"
 )
 
 // VerdictOrder is the order buckets are printed in; unlisted actions sort last.

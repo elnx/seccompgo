@@ -10,9 +10,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"seccompgo/internal/dumper"
-	"seccompgo/internal/logger"
-	"seccompgo/internal/util"
+	"github.com/elnx/seccompgo/internal/dumper"
+	"github.com/elnx/seccompgo/internal/logger"
+	"github.com/elnx/seccompgo/internal/util"
 )
 
 // Version is the tool version.

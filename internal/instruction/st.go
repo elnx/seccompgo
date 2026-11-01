@@ -3,7 +3,7 @@ package instruction
 import (
 	"fmt"
 
-	"seccompgo/internal/symbolic"
+	"github.com/elnx/seccompgo/internal/symbolic"
 )
 
 // ST stores A (or X, when x is set) into a scratch slot.

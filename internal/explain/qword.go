@@ -3,8 +3,8 @@ package explain
 import (
 	"fmt"
 
-	"seccompgo/internal/consts"
-	"seccompgo/internal/symbolic"
+	"github.com/elnx/seccompgo/internal/consts"
+	"github.com/elnx/seccompgo/internal/symbolic"
 )
 
 // Fact is a rendered path fact: either a *symbolic.Constraint or a *Qword.

@@ -6,12 +6,12 @@ import (
 	"strings"
 	"testing"
 
-	"seccompgo/internal/asm"
-	"seccompgo/internal/audit"
-	"seccompgo/internal/disasm"
-	"seccompgo/internal/explain"
-	"seccompgo/internal/instruction"
-	"seccompgo/internal/symbolic/executor"
+	"github.com/elnx/seccompgo/internal/asm"
+	"github.com/elnx/seccompgo/internal/audit"
+	"github.com/elnx/seccompgo/internal/disasm"
+	"github.com/elnx/seccompgo/internal/explain"
+	"github.com/elnx/seccompgo/internal/instruction"
+	"github.com/elnx/seccompgo/internal/symbolic/executor"
 )
 
 func instsOf(t *testing.T, raw []byte, arch string) []instruction.Inst {

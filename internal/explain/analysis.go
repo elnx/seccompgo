@@ -4,9 +4,9 @@ package explain
 import (
 	"fmt"
 
-	"seccompgo/internal/consts"
-	"seccompgo/internal/symbolic"
-	"seccompgo/internal/symbolic/executor"
+	"github.com/elnx/seccompgo/internal/consts"
+	"github.com/elnx/seccompgo/internal/symbolic"
+	"github.com/elnx/seccompgo/internal/symbolic/executor"
 )
 
 // PathFacts is the seccomp reading of one leaf's path condition.

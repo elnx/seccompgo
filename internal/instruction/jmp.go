@@ -3,9 +3,9 @@ package instruction
 import (
 	"fmt"
 
-	"seccompgo/internal/consts"
-	"seccompgo/internal/symbolic"
-	"seccompgo/internal/util"
+	"github.com/elnx/seccompgo/internal/consts"
+	"github.com/elnx/seccompgo/internal/symbolic"
+	"github.com/elnx/seccompgo/internal/util"
 )
 
 // JMP is an unconditional jump or a comparison of A against X or an immediate.

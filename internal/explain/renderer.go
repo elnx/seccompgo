@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"strings"
 
-	"seccompgo/internal/consts"
-	"seccompgo/internal/symbolic"
-	"seccompgo/internal/util"
+	"github.com/elnx/seccompgo/internal/consts"
+	"github.com/elnx/seccompgo/internal/symbolic"
+	"github.com/elnx/seccompgo/internal/util"
 )
 
 // Renderer renders path facts as C-like conditions.

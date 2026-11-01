@@ -6,10 +6,10 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"seccompgo/internal/consts"
-	"seccompgo/internal/instruction"
-	"seccompgo/internal/symbolic/executor"
-	"seccompgo/internal/util"
+	"github.com/elnx/seccompgo/internal/consts"
+	"github.com/elnx/seccompgo/internal/instruction"
+	"github.com/elnx/seccompgo/internal/symbolic/executor"
+	"github.com/elnx/seccompgo/internal/util"
 )
 
 // Summary renders a walked filter as a per-action policy.

@@ -1,7 +1,7 @@
 package instruction
 
 import (
-	"seccompgo/internal/symbolic"
+	"github.com/elnx/seccompgo/internal/symbolic"
 )
 
 // MISC copies between A and X.

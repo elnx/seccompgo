@@ -3,7 +3,7 @@ package instruction
 import (
 	"fmt"
 
-	"seccompgo/internal/symbolic"
+	"github.com/elnx/seccompgo/internal/symbolic"
 )
 
 // ALU performs an arithmetic or bitwise operation on A.

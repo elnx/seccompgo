@@ -5,8 +5,8 @@ import (
 	"encoding/binary"
 	"fmt"
 
-	"seccompgo/internal/consts"
-	"seccompgo/internal/symbolic"
+	"github.com/elnx/seccompgo/internal/consts"
+	"github.com/elnx/seccompgo/internal/symbolic"
 )
 
 // BPF is one BPF instruction plus the architecture and line it belongs to.

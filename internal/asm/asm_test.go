@@ -8,9 +8,9 @@ import (
 	"strings"
 	"testing"
 
-	"seccompgo/internal/disasm"
-	"seccompgo/internal/instruction"
-	"seccompgo/internal/util"
+	"github.com/elnx/seccompgo/internal/disasm"
+	"github.com/elnx/seccompgo/internal/instruction"
+	"github.com/elnx/seccompgo/internal/util"
 )
 
 func firstDecompile(t *testing.T, src, arch string) (string, error) {

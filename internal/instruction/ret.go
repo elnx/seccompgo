@@ -3,8 +3,8 @@ package instruction
 import (
 	"fmt"
 
-	"seccompgo/internal/consts"
-	"seccompgo/internal/symbolic"
+	"github.com/elnx/seccompgo/internal/consts"
+	"github.com/elnx/seccompgo/internal/symbolic"
 )
 
 // RET terminates the filter.

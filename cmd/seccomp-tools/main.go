@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"seccompgo/internal/cli"
+	"github.com/elnx/seccompgo/internal/cli"
 )
 
 func main() {

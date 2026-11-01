@@ -8,9 +8,9 @@ import (
 	"strings"
 	"testing"
 
-	"seccompgo/internal/cli"
-	"seccompgo/internal/dumper"
-	"seccompgo/internal/util"
+	"github.com/elnx/seccompgo/internal/cli"
+	"github.com/elnx/seccompgo/internal/dumper"
+	"github.com/elnx/seccompgo/internal/util"
 )
 
 func runCLI(t *testing.T, argv []string, stdin string) (string, int) {

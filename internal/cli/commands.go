@@ -6,15 +6,15 @@ import (
 	"strconv"
 	"strings"
 
-	"seccompgo/internal/asm"
-	"seccompgo/internal/audit"
-	"seccompgo/internal/consts"
-	"seccompgo/internal/disasm"
-	"seccompgo/internal/emulator"
-	"seccompgo/internal/explain"
-	"seccompgo/internal/instruction"
-	"seccompgo/internal/logger"
-	"seccompgo/internal/util"
+	"github.com/elnx/seccompgo/internal/asm"
+	"github.com/elnx/seccompgo/internal/audit"
+	"github.com/elnx/seccompgo/internal/consts"
+	"github.com/elnx/seccompgo/internal/disasm"
+	"github.com/elnx/seccompgo/internal/emulator"
+	"github.com/elnx/seccompgo/internal/explain"
+	"github.com/elnx/seccompgo/internal/instruction"
+	"github.com/elnx/seccompgo/internal/logger"
+	"github.com/elnx/seccompgo/internal/util"
 )
 
 func parseFloat(s string) (float64, error) {

@@ -6,9 +6,9 @@ package instruction
 import (
 	"fmt"
 
-	"seccompgo/internal/bpf"
-	"seccompgo/internal/consts"
-	"seccompgo/internal/symbolic"
+	"github.com/elnx/seccompgo/internal/bpf"
+	"github.com/elnx/seccompgo/internal/consts"
+	"github.com/elnx/seccompgo/internal/symbolic"
 )
 
 // Kind is the shape of a symbolized instruction.

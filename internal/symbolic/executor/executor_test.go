@@ -6,12 +6,12 @@ import (
 	"testing"
 	"time"
 
-	"seccompgo/internal/bpf"
-	"seccompgo/internal/consts"
-	"seccompgo/internal/disasm"
-	"seccompgo/internal/instruction"
-	"seccompgo/internal/symbolic"
-	"seccompgo/internal/symbolic/executor"
+	"github.com/elnx/seccompgo/internal/bpf"
+	"github.com/elnx/seccompgo/internal/consts"
+	"github.com/elnx/seccompgo/internal/disasm"
+	"github.com/elnx/seccompgo/internal/instruction"
+	"github.com/elnx/seccompgo/internal/symbolic"
+	"github.com/elnx/seccompgo/internal/symbolic/executor"
 )
 
 func cmd(command string, parts map[string]string) uint16 {

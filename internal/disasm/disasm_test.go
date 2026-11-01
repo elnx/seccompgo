@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	"seccompgo/internal/asm"
-	"seccompgo/internal/disasm"
+	"github.com/elnx/seccompgo/internal/asm"
+	"github.com/elnx/seccompgo/internal/disasm"
 )
 
 func fixture(t *testing.T, name string) []byte {

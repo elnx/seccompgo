@@ -4,9 +4,9 @@ package emulator
 import (
 	"fmt"
 
-	"seccompgo/internal/consts"
-	"seccompgo/internal/instruction"
-	"seccompgo/internal/util"
+	"github.com/elnx/seccompgo/internal/consts"
+	"github.com/elnx/seccompgo/internal/instruction"
+	"github.com/elnx/seccompgo/internal/util"
 )
 
 // Emulator holds the filter and the concrete input to run it with.

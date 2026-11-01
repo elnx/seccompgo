@@ -8,12 +8,12 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"seccompgo/internal/consts"
-	"seccompgo/internal/explain"
-	"seccompgo/internal/instruction"
-	"seccompgo/internal/symbolic"
-	"seccompgo/internal/symbolic/executor"
-	"seccompgo/internal/util"
+	"github.com/elnx/seccompgo/internal/consts"
+	"github.com/elnx/seccompgo/internal/explain"
+	"github.com/elnx/seccompgo/internal/instruction"
+	"github.com/elnx/seccompgo/internal/symbolic"
+	"github.com/elnx/seccompgo/internal/symbolic/executor"
+	"github.com/elnx/seccompgo/internal/util"
 )
 
 // Severities, most to least severe.

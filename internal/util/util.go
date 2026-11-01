@@ -11,7 +11,7 @@ import (
 	"syscall"
 	"unsafe"
 
-	"seccompgo/internal/assets"
+	"github.com/elnx/seccompgo/internal/assets"
 )
 
 // SupportedArchs returns the architectures with a syscall table, sorted.

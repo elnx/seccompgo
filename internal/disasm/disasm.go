@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"strings"
 
-	"seccompgo/internal/bpf"
-	"seccompgo/internal/instruction"
-	"seccompgo/internal/symbolic"
-	"seccompgo/internal/util"
+	"github.com/elnx/seccompgo/internal/bpf"
+	"github.com/elnx/seccompgo/internal/instruction"
+	"github.com/elnx/seccompgo/internal/symbolic"
+	"github.com/elnx/seccompgo/internal/util"
 )
 
 // ToBPF splits raw into 8-byte instructions. A trailing partial instruction is ignored,

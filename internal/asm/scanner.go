@@ -7,7 +7,7 @@ import (
 	"strings"
 	"sync"
 
-	"seccompgo/internal/consts"
+	"github.com/elnx/seccompgo/internal/consts"
 )
 
 // Token is one scanner token with its source location.

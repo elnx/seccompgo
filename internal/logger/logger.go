@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"seccompgo/internal/util"
+	"github.com/elnx/seccompgo/internal/util"
 )
 
 // rubyLines splits s the way Ruby's String#lines does: each line keeps its newline,

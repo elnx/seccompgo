@@ -15,10 +15,10 @@ import (
 	"time"
 	"unsafe"
 
-	"seccompgo/internal/asm"
-	"seccompgo/internal/consts"
-	"seccompgo/internal/logger"
-	"seccompgo/internal/util"
+	"github.com/elnx/seccompgo/internal/asm"
+	"github.com/elnx/seccompgo/internal/consts"
+	"github.com/elnx/seccompgo/internal/logger"
+	"github.com/elnx/seccompgo/internal/util"
 )
 
 // ptrace requests.

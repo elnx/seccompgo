@@ -3,8 +3,8 @@ package executor
 import (
 	"strconv"
 
-	"seccompgo/internal/instruction"
-	"seccompgo/internal/symbolic"
+	"github.com/elnx/seccompgo/internal/instruction"
+	"github.com/elnx/seccompgo/internal/symbolic"
 )
 
 // StepCap bounds the number of visited states, so a pathological program cannot make

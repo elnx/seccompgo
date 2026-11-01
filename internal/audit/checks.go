@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"seccompgo/internal/consts"
-	"seccompgo/internal/explain"
+	"github.com/elnx/seccompgo/internal/consts"
+	"github.com/elnx/seccompgo/internal/explain"
 )
 
 func archUnchecked(analysis *explain.Analysis) []*Finding {

@@ -5,9 +5,9 @@ import (
 	"regexp"
 	"strconv"
 
-	"seccompgo/internal/bpf"
-	"seccompgo/internal/consts"
-	"seccompgo/internal/util"
+	"github.com/elnx/seccompgo/internal/bpf"
+	"github.com/elnx/seccompgo/internal/consts"
+	"github.com/elnx/seccompgo/internal/util"
 )
 
 // JumpDistanceMax is the farthest relative BPF jump.

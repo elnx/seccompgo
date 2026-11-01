@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"seccompgo/internal/consts"
+	"github.com/elnx/seccompgo/internal/consts"
 )
 
 type scalarKind int

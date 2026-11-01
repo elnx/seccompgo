@@ -9,9 +9,9 @@ import (
 	"testing"
 	"time"
 
-	"seccompgo/internal/disasm"
-	"seccompgo/internal/dumper"
-	"seccompgo/internal/util"
+	"github.com/elnx/seccompgo/internal/disasm"
+	"github.com/elnx/seccompgo/internal/dumper"
+	"github.com/elnx/seccompgo/internal/util"
 )
 
 func dataPath(name string) string {
