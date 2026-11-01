@@ -2,7 +2,7 @@ GO      ?= go
 BIN     ?= bin/seccomp-tools
 RUBY_SRC ?= ../seccomp-tools
 
-.PHONY: all build test vet fmt generate clean install
+.PHONY: all build test fix fix-check vet fmt generate clean install
 
 all: build
 
@@ -13,7 +13,17 @@ build:
 test:
 	$(GO) test ./...
 
-vet:
+# Apply go fix modernizations. Two passes: a fixer can expose another
+# (e.g. newexpr adds a //go:fix inline directive the inline fixer consumes).
+fix:
+	$(GO) fix ./...
+	$(GO) fix ./...
+
+# Fail with a patch when a fixer would rewrite any package.
+fix-check:
+	$(GO) fix -diff ./...
+
+vet: fix-check
 	$(GO) vet ./...
 
 fmt:

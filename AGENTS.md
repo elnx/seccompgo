@@ -15,7 +15,8 @@ Hard constraint: **no cgo**. All ptrace work uses raw `SYS_PTRACE` syscalls, and
 ```bash
 make            # build bin/seccomp-tools
 make test       # go test ./...
-make vet        # go vet ./...
+make vet        # go vet ./... plus the `go fix -diff` check
+make fix        # apply `go fix ./...` modernizations
 make fmt        # gofmt every package
 make generate   # regenerate internal/consts/tables_generated.go from ../seccomp-tools
 ```
@@ -89,6 +90,8 @@ committed; do not edit it by hand.
 
 - Standard library only; no external modules unless unavoidable and discussed.
 - Keep the existing Go style, `gofmt`, and package boundaries. Go 1.27 is the module
-  baseline (`new(expr)` is available).
+  baseline (`new(expr)` is available). Run `make fix` after touching code or
+  upgrading Go; `make vet` includes `make fix-check`, which fails with a patch when
+  a fixer would rewrite a package. Do not hand-write pre-fix forms.
 - Delete dead helpers rather than leaving compatibility shims; this is a full port,
   not a wrapper around the Ruby gem.

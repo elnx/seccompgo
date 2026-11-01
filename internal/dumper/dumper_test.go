@@ -27,9 +27,6 @@ func dump(t *testing.T, args []string, limit int, timeout *float64) []dumper.Res
 	return out
 }
 
-//go:fix inline
-func floatPtr(v float64) *float64 { return new(v) }
-
 func TestDumpDiaryExact(t *testing.T) {
 	if util.SystemArch() != "amd64" {
 		t.Skip("requires amd64")
@@ -38,7 +35,7 @@ func TestDumpDiaryExact(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	out := dump(t, []string{dataPath("twctf-2016-diary")}, 1, floatPtr(10))
+	out := dump(t, []string{dataPath("twctf-2016-diary")}, 1, new(float64(10)))
 	if len(out) != 1 {
 		t.Fatalf("count = %d", len(out))
 	}
@@ -54,18 +51,18 @@ func TestDumpTwoFiltersAndLimit(t *testing.T) {
 	if util.SystemArch() != "amd64" {
 		t.Skip("requires amd64")
 	}
-	out := dump(t, []string{dataPath("clone_two_seccomp")}, -1, floatPtr(10))
+	out := dump(t, []string{dataPath("clone_two_seccomp")}, -1, new(float64(10)))
 	if len(out) != 2 {
 		t.Fatalf("count = %d", len(out))
 	}
 	if len(out[0].BPF) != 16 || len(out[1].BPF) != 8 {
 		t.Fatalf("sizes = %d,%d", len(out[0].BPF), len(out[1].BPF))
 	}
-	out = dump(t, []string{dataPath("clone_two_seccomp")}, 2, floatPtr(10))
+	out = dump(t, []string{dataPath("clone_two_seccomp")}, 2, new(float64(10)))
 	if len(out) != 2 {
 		t.Fatalf("limit 2 count = %d", len(out))
 	}
-	out = dump(t, []string{dataPath("clone_two_seccomp")}, 1, floatPtr(10))
+	out = dump(t, []string{dataPath("clone_two_seccomp")}, 1, new(float64(10)))
 	if len(out) != 1 {
 		t.Fatalf("limit 1 count = %d", len(out))
 	}
@@ -75,7 +72,7 @@ func TestDumpSeccompSyscall(t *testing.T) {
 	if util.SystemArch() != "amd64" {
 		t.Skip("requires amd64")
 	}
-	out := dump(t, []string{dataPath("syscall_seccomp")}, 1, floatPtr(10))
+	out := dump(t, []string{dataPath("syscall_seccomp")}, 1, new(float64(10)))
 	if len(out) != 1 {
 		t.Fatalf("count = %d", len(out))
 	}
@@ -87,7 +84,7 @@ func TestDumpStrictMode(t *testing.T) {
 	}
 	want := []byte(" \x00\x00\x00\x00\x00\x00\x00\x15\x00\x04\x00\x00\x00\x00\x00\x15\x00\x03\x00\x01\x00\x00\x00\x15\x00\x02\x00\x3c\x00\x00\x00\x15\x00\x01\x00\x0f\x00\x00\x00\x06\x00\x00\x00\x00\x00\x00\x00\x06\x00\x00\x00\x00\x00\xff\x7f")
 	for _, bin := range []string{"strict_prctl", "strict_seccomp"} {
-		out := dump(t, []string{dataPath(bin)}, 1, floatPtr(10))
+		out := dump(t, []string{dataPath(bin)}, 1, new(float64(10)))
 		if !bytes.Equal(out[0].BPF, want) {
 			t.Fatalf("%s filter differs: %x", bin, out[0].BPF)
 		}
@@ -98,14 +95,14 @@ func TestDumpNoSeccompAndMissingBinary(t *testing.T) {
 	if util.SystemArch() != "amd64" {
 		t.Skip("requires amd64")
 	}
-	if out := dumper.Dump([]string{"ls >/dev/null"}, 1, floatPtr(10)); len(out) != 0 {
+	if out := dumper.Dump([]string{"ls >/dev/null"}, 1, new(float64(10))); len(out) != 0 {
 		t.Fatalf("ls dumped %d filters", len(out))
 	}
 	old := util.Stdout
 	var buf bytes.Buffer
 	util.Stdout = &buf
 	util.DisableColor()
-	out := dumper.Dump([]string{"this_is_not_exist"}, 1, floatPtr(10))
+	out := dumper.Dump([]string{"this_is_not_exist"}, 1, new(float64(10)))
 	util.Stdout = old
 	if len(out) != 0 {
 		t.Fatalf("missing binary dumped %d", len(out))
@@ -128,7 +125,7 @@ func TestDumpTimeout(t *testing.T) {
 		t.Fatalf("timeout took %v", elapsed)
 	}
 	cmd := "sleep 1d | " + dataPath("two_filters")
-	out = dumper.Dump([]string{cmd}, -1, floatPtr(1))
+	out = dumper.Dump([]string{cmd}, -1, new(float64(1)))
 	if len(out) != 2 {
 		t.Fatalf("filters before timeout = %d", len(out))
 	}
