@@ -27,7 +27,8 @@ func dump(t *testing.T, args []string, limit int, timeout *float64) []dumper.Res
 	return out
 }
 
-func floatPtr(v float64) *float64 { return &v }
+//go:fix inline
+func floatPtr(v float64) *float64 { return new(v) }
 
 func TestDumpDiaryExact(t *testing.T) {
 	if util.SystemArch() != "amd64" {
@@ -119,7 +120,7 @@ func TestDumpTimeout(t *testing.T) {
 		t.Skip("requires amd64")
 	}
 	start := time.Now()
-	out := dumper.Dump([]string{"sleep", "1d"}, 1, floatPtr(0.1))
+	out := dumper.Dump([]string{"sleep", "1d"}, 1, new(0.1))
 	if len(out) != 0 {
 		t.Fatalf("dumped %d", len(out))
 	}

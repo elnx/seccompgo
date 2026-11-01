@@ -2,6 +2,8 @@ package instruction
 
 import (
 	"fmt"
+	"slices"
+	"strings"
 
 	"github.com/elnx/seccompgo/internal/consts"
 	"github.com/elnx/seccompgo/internal/symbolic"
@@ -73,13 +75,7 @@ func (i *LD) argsName(idx int) string {
 	for _, st := range i.b.States {
 		v, ok := st.Pinned(consts.SysNumber)
 		p := pin{v, ok}
-		dup := false
-		for _, q := range pins {
-			if q == p {
-				dup = true
-				break
-			}
-		}
+		dup := slices.Contains(pins, p)
 		if !dup {
 			pins = append(pins, p)
 		}
@@ -113,14 +109,14 @@ func (i *LD) argsName(idx int) string {
 }
 
 func joinComma(xs []string) string {
-	out := ""
+	var out strings.Builder
 	for j, x := range xs {
 		if j > 0 {
-			out += ", "
+			out.WriteString(", ")
 		}
-		out += x
+		out.WriteString(x)
 	}
-	return out
+	return out.String()
 }
 
 func (i *LD) seccompDataStr() string {

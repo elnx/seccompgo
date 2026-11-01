@@ -3,6 +3,7 @@ package executor_test
 import (
 	"os"
 	"path/filepath"
+	"slices"
 	"testing"
 	"time"
 
@@ -58,12 +59,7 @@ func rets(leaves []*executor.Leaf) []uint32 {
 }
 
 func contains(xs []uint32, x uint32) bool {
-	for _, v := range xs {
-		if v == x {
-			return true
-		}
-	}
-	return false
+	return slices.Contains(xs, x)
 }
 
 func TestExecutorEveryInstruction(t *testing.T) {
@@ -251,7 +247,7 @@ func TestExecutorStepCap(t *testing.T) {
 func TestExecutorRejoiningDiamonds(t *testing.T) {
 	n := 11
 	var insts []instruction.Inst
-	for i := 0; i < n; i++ {
+	for i := range n {
 		insts = append(insts,
 			inst(t, cmd("ld", map[string]string{"mode": "abs"}), 0, 0, uint32(i*4)),
 			inst(t, cmd("jmp", map[string]string{"jmp": "jeq", "src": "k"}), 1, 0, uint32(0x1000+i)),

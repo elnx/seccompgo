@@ -2,6 +2,7 @@ package cli
 
 import (
 	"fmt"
+	"slices"
 	"strconv"
 	"strings"
 )
@@ -119,13 +120,7 @@ func (o *option) set(opts *Options, val string, negated bool) error {
 	case optNegatable:
 		return o.apply(opts, val)
 	case optChoice:
-		ok := false
-		for _, c := range o.choices {
-			if c == val {
-				ok = true
-				break
-			}
-		}
+		ok := slices.Contains(o.choices, val)
 		if !ok {
 			return fmt.Errorf("invalid argument: %s", val)
 		}

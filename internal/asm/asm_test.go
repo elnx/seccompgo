@@ -518,28 +518,23 @@ A == 0 ? next : end
 			}
 			switch tc.typ.(type) {
 			case *ParseError:
-				var e *ParseError
-				if !errors.As(err, &e) {
+				if _, ok := errors.AsType[*ParseError](err); !ok {
 					t.Fatalf("type %T", err)
 				}
 			case *BackwardJumpError:
-				var e *BackwardJumpError
-				if !errors.As(err, &e) {
+				if _, ok := errors.AsType[*BackwardJumpError](err); !ok {
 					t.Fatalf("type %T", err)
 				}
 			case *UndefinedLabelError:
-				var e *UndefinedLabelError
-				if !errors.As(err, &e) {
+				if _, ok := errors.AsType[*UndefinedLabelError](err); !ok {
 					t.Fatalf("type %T", err)
 				}
 			case *DuplicateLabelError:
-				var e *DuplicateLabelError
-				if !errors.As(err, &e) {
+				if _, ok := errors.AsType[*DuplicateLabelError](err); !ok {
 					t.Fatalf("type %T", err)
 				}
 			case *LongJumpError:
-				var e *LongJumpError
-				if !errors.As(err, &e) {
+				if _, ok := errors.AsType[*LongJumpError](err); !ok {
 					t.Fatalf("type %T", err)
 				}
 			}
@@ -635,8 +630,7 @@ func TestParserNewlinesAndNotConditions(t *testing.T) {
 func TestParserTrailingLabel(t *testing.T) {
 	c := NewCompiler("      goto oob\n      oob:\n", "", "amd64")
 	_, err := c.Compile()
-	var e *ParseError
-	if !errors.As(err, &e) {
+	if _, ok := errors.AsType[*ParseError](err); !ok {
 		t.Fatalf("error = %T", err)
 	}
 	want := "<inline>:2:11 unexpected string \"\\n\"\n      oob:\n          ^\n"

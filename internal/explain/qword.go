@@ -2,6 +2,7 @@ package explain
 
 import (
 	"fmt"
+	"slices"
 
 	"github.com/elnx/seccompgo/internal/consts"
 	"github.com/elnx/seccompgo/internal/symbolic"
@@ -56,12 +57,7 @@ func (f *QwordFusion) BaseOf(offset uint32) uint32 {
 }
 
 func isQwordBase(base uint32) bool {
-	for _, b := range consts.QwordBases {
-		if b == base {
-			return true
-		}
-	}
-	return false
+	return slices.Contains(consts.QwordBases, base)
 }
 
 // Fold fuses the word facts of one path condition; unpaired facts pass through.

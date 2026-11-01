@@ -8,6 +8,7 @@ import (
 	"io/fs"
 	"os"
 	"path/filepath"
+	"slices"
 	"strings"
 
 	"github.com/elnx/seccompgo/internal/dumper"
@@ -79,11 +80,9 @@ func Run(argv []string) int {
 		pre = mapped[:idx]
 		rest = mapped[idx:]
 	}
-	for _, a := range pre {
-		if a == "--version" {
-			show("SeccompTools Version " + Version)
-			return 0
-		}
+	if slices.Contains(pre, "--version") {
+		show("SeccompTools Version " + Version)
+		return 0
 	}
 	if idx < 0 {
 		show(usage())
@@ -91,11 +90,8 @@ func Run(argv []string) int {
 	}
 	cmd := rest[0]
 	rest = rest[1:]
-	for _, a := range pre {
-		if a == "--help" {
-			rest = []string{"--help"}
-			break
-		}
+	if slices.Contains(pre, "--help") {
+		rest = []string{"--help"}
 	}
 	info, ok := commands[cmd]
 	if !ok {

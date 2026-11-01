@@ -3,6 +3,7 @@ package audit_test
 import (
 	"os"
 	"path/filepath"
+	"slices"
 	"strings"
 	"testing"
 
@@ -71,12 +72,7 @@ func ids(r *audit.Report) []string {
 }
 
 func hasID(r *audit.Report, id string) bool {
-	for _, v := range ids(r) {
-		if v == id {
-			return true
-		}
-	}
-	return false
+	return slices.Contains(ids(r), id)
 }
 
 func finding(r *audit.Report, id string) *audit.Finding {

@@ -1,6 +1,7 @@
 package executor
 
 import (
+	"slices"
 	"strconv"
 
 	"github.com/elnx/seccompgo/internal/instruction"
@@ -197,13 +198,7 @@ func cellFeasible(constraints []*symbolic.Constraint) bool {
 	for _, c := range constraints {
 		if c.Op() == "==" {
 			v := c.Rhs().Val()
-			dup := false
-			for _, old := range eqs {
-				if old == v {
-					dup = true
-					break
-				}
-			}
+			dup := slices.Contains(eqs, v)
 			if !dup {
 				eqs = append(eqs, v)
 			}

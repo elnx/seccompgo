@@ -5,6 +5,7 @@ package instruction
 
 import (
 	"fmt"
+	"slices"
 
 	"github.com/elnx/seccompgo/internal/bpf"
 	"github.com/elnx/seccompgo/internal/consts"
@@ -118,13 +119,7 @@ func (i *base) inferArch() string {
 	for _, st := range i.b.States {
 		v, ok := st.Pinned(consts.Arch)
 		p := pin{v, ok}
-		found := false
-		for _, q := range pins {
-			if q == p {
-				found = true
-				break
-			}
-		}
+		found := slices.Contains(pins, p)
 		if !found {
 			pins = append(pins, p)
 		}

@@ -39,8 +39,8 @@ func VerdictRank(label string) (int, string) {
 
 // actionOf strips any "(data)" or " (annotation)" suffix from a label.
 func actionOf(label string) string {
-	if i := strings.IndexByte(label, '('); i >= 0 {
-		return strings.TrimRight(label[:i], " ")
+	if before, _, ok := strings.Cut(label, "("); ok {
+		return strings.TrimRight(before, " ")
 	}
 	return label
 }

@@ -3,6 +3,7 @@ package explain
 
 import (
 	"fmt"
+	"slices"
 
 	"github.com/elnx/seccompgo/internal/consts"
 	"github.com/elnx/seccompgo/internal/symbolic"
@@ -185,13 +186,7 @@ func (a *Analysis) ArchValues() []uint32 {
 	a.archReady = true
 	for _, l := range a.leaves {
 		if v := a.Facts(l).ArchEq; v != nil {
-			dup := false
-			for _, old := range a.archVals {
-				if old == *v {
-					dup = true
-					break
-				}
-			}
+			dup := slices.Contains(a.archVals, *v)
 			if !dup {
 				a.archVals = append(a.archVals, *v)
 			}

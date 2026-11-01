@@ -90,8 +90,8 @@ func ArgNames(name string) []string {
 	if args, ok := SyscallArgs[name]; ok {
 		return args
 	}
-	if strings.HasPrefix(name, "x32_") {
-		if args, ok := SyscallArgs[strings.TrimPrefix(name, "x32_")]; ok {
+	if after, ok := strings.CutPrefix(name, "x32_"); ok {
+		if args, ok := SyscallArgs[after]; ok {
 			return args
 		}
 	}

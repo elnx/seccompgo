@@ -74,8 +74,7 @@ func TestEmulatorDiary(t *testing.T) {
 		t.Fatalf("kill: %+v %v", res, err)
 	}
 	_, err = emulator.New(insts, nil, nil, nil, "amd64").Run()
-	var undef *emulator.UndefinedVariableError
-	if !errors.As(err, &undef) {
+	if _, ok := errors.AsType[*emulator.UndefinedVariableError](err); !ok {
 		t.Fatalf("error type %T", err)
 	}
 	want := "Undefined Variable\n\t0000: A = sys_number <- `sys_number` is undefined"

@@ -9,6 +9,7 @@ import (
 	"os"
 	"os/exec"
 	"runtime"
+	"slices"
 	"strings"
 	"sync"
 	"syscall"
@@ -237,7 +238,7 @@ func (s *tracedSyscall) dumpBPF(a abi) ([]byte, error) {
 	}
 	out := make([]byte, 0, length*8)
 	word := make([]byte, 8)
-	for i := uint64(0); i < length; i++ {
+	for i := range length {
 		v := peekData(s.pid, ptr+i*8)
 		binary.NativeEndian.PutUint64(word, v)
 		out = append(out, word...)
@@ -291,10 +292,8 @@ func Dump(args []string, limit int, timeout *float64) []Result {
 	addPID := func(p int) {
 		mu.Lock()
 		defer mu.Unlock()
-		for _, old := range pids {
-			if old == p {
-				return
-			}
+		if slices.Contains(pids, p) {
+			return
 		}
 		pids = append(pids, p)
 	}

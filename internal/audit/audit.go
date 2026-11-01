@@ -4,6 +4,7 @@ package audit
 import (
 	"fmt"
 	"regexp"
+	"slices"
 	"sort"
 	"strings"
 	"unicode/utf8"
@@ -236,10 +237,8 @@ func (p *Policy) ConditionFor(nr uint32, action string) *string {
 			conds = append(conds, text)
 		}
 	}
-	for _, c := range conds {
-		if c == "" {
-			return nil
-		}
+	if slices.Contains(conds, "") {
+		return nil
 	}
 	if len(conds) == 0 {
 		return nil
@@ -364,7 +363,7 @@ func paragraph(text string, names []string, first, hang string) string {
 	indent := first
 	line := ""
 	hasLine := false
-	for _, word := range strings.Fields(text) {
+	for word := range strings.FieldsSeq(text) {
 		if !hasLine {
 			line = word
 			hasLine = true

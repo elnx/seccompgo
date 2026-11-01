@@ -34,7 +34,7 @@ func parseTable(path string) ([]entry, error) {
 		return nil, err
 	}
 	var out []entry
-	for _, line := range strings.Split(string(data), "\n") {
+	for line := range strings.SplitSeq(string(data), "\n") {
 		m := entryRe.FindStringSubmatch(line)
 		if m == nil {
 			continue
@@ -58,7 +58,7 @@ func parseArgs(path string) (map[string][]string, []string, error) {
 	}
 	out := map[string][]string{}
 	var order []string
-	for _, line := range strings.Split(string(data), "\n") {
+	for line := range strings.SplitSeq(string(data), "\n") {
 		m := argsRe.FindStringSubmatch(line)
 		if m == nil {
 			continue

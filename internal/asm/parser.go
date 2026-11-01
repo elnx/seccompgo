@@ -437,8 +437,8 @@ func (p *parser) numberValue(t *Token) (uint32, error) {
 		return 0, p.raiseAt(t, fmt.Sprintf("unexpected string %q", t.Str))
 	case "SYSCALL":
 		name := t.Str
-		if i := strings.IndexByte(name, '.'); i >= 0 {
-			arch, sys := name[:i], name[i+1:]
+		if before, after, ok := strings.Cut(name, "."); ok {
+			arch, sys := before, after
 			if v, ok := consts.SyscallNum(strings.ToLower(arch), sys); ok {
 				return v, nil
 			}

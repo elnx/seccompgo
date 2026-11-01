@@ -2,6 +2,7 @@ package explain
 
 import (
 	"fmt"
+	"slices"
 	"sort"
 	"strings"
 	"unicode/utf8"
@@ -363,12 +364,7 @@ func wrapLines(tokens []string) []string {
 }
 
 func contains(xs []string, x string) bool {
-	for _, v := range xs {
-		if v == x {
-			return true
-		}
-	}
-	return false
+	return slices.Contains(xs, x)
 }
 
 // Explain walks a filter and returns its summary.
