@@ -15,7 +15,7 @@ go install github.com/elnx/seccompgo/cmd/seccomp-tools@latest
 export PATH="$(go env GOPATH)/bin:$PATH"
 ```
 
-需要 Go 1.27+。固定版本把 `@latest` 换成对应 tag（如 `@v0.1.0`）；从源码安装用
+需要 Go 1.27+。固定版本把 `@latest` 换成对应 tag（如 `@v0.2.0`）；从源码安装用
 `make install`。二进制名与上游 Ruby gem 相同，两者共存时注意 `PATH` 优先级。
 
 ## 构建
