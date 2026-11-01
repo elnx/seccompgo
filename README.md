@@ -3,6 +3,21 @@
 `seccomp-tools` 的纯 Go 复刻，与上游 Ruby 实现功能一致，面向 Linux。
 不使用 cgo：`dump` 基于原始 `ptrace` 系统调用实现。
 
+## 安装
+
+```bash
+go install github.com/elnx/seccompgo/cmd/seccomp-tools@latest
+```
+
+`go install` 会把二进制写到 `GOBIN`，未设置时是 `$(go env GOPATH)/bin`；确保该目录在 `PATH` 中：
+
+```bash
+export PATH="$(go env GOPATH)/bin:$PATH"
+```
+
+需要 Go 1.27+。固定版本把 `@latest` 换成对应 tag（如 `@v0.1.0`）；从源码安装用
+`make install`。二进制名与上游 Ruby gem 相同，两者共存时注意 `PATH` 优先级。
+
 ## 构建
 
 ```bash
